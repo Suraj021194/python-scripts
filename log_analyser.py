@@ -1,9 +1,9 @@
 import argparse, json, logging, sys, os
 
 parser=argparse.ArgumentParser()
-parser.add_argument("--log-file", default="/tmp/app.log")
-parser.add_argument("--threshold", default=3, type=int)
-parser.add_argument("--output", default="/tmp/log_report.json")
+parser.add_argument("--log-file", default=os.environ.get("LOG_FILE", "/app/logs/app.log"))
+parser.add_argument("--threshold", default=int(os.environ.get("THRESHOLD", "3")), type=int)
+parser.add_argument("--output", default=os.environ.get("OUTPUT_FILE", "/app/output/log_report.json"))
 
 args=parser.parse_args()
 
