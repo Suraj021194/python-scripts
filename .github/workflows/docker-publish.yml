@@ -8,7 +8,7 @@ jobs:
     env:
       IMAGE_TAG: suraj0294/log-analyser:${{ github.sha }}
     steps:
-      - uses: action/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Build Docker image
         run: docker build -t $IMAGE_TAG
