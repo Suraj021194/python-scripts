@@ -1,8 +1,12 @@
+name: Docker Build and Push
+
+on: push
+
 jobs:
   build-and-push:
     runs-on: ubuntu:latest
     env:
-      IMAGE_TAG: 
+      IMAGE_TAG: suraj0294/log-analyser:${{ github.sha }}
     steps:
       - uses: action/checkout@v4
 
