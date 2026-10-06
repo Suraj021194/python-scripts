@@ -1,17 +1,17 @@
 name: Test and Publish
 on: Push
 
-job:
+jobs:
   test:
-    runs-on:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ["3.10", "3.11", "3.12"]
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
-        uses: action/step-python@v5
+        uses: actions/step-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: RUN script with --help to verify it loads
+      - name: Run script with --help to verify it loads
         run:  python3 log-analyser.py --help
