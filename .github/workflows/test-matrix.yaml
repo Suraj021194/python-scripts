@@ -1,5 +1,5 @@
 name: Test and Publish
-on: Push
+on: push
 
 jobs:
   test:
@@ -10,8 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/step-python@v5
+        uses: actions/stepup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
       - name: Run script with --help to verify it loads
-        run:  python3 log-analyser.py --help
+        run:  python3 log_analyser.py --help
