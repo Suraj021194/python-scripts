@@ -49,3 +49,8 @@ docker pull suraj0294/log-analyser:<commit-sha>
 ```
 
 See it live: [hub.docker.com/r/suraj0294/log-analyser](https://hub.docker.com/r/suraj0294/log-analyser)
+
+## Testing across Python versions
+`.github/workflows/test-matrix.yaml` runs `python3 log_analyser.py --help` on Python 3.10, 3.11 and 3.12 in parallel (`strategy.matrix`) on every push. Each version appears as its own job, so a failure shows which version broke.
+
+`logs/` and `output/` are runtime folders and are git-ignored.
