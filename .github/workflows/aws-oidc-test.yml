@@ -2,7 +2,7 @@ name: AWS  OIDC test
 
 on: workflow
 
-permission:
+permissions:
   id-token: write
   contents: read
 
