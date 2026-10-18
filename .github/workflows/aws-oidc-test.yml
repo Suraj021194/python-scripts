@@ -1,6 +1,9 @@
 name: AWS  OIDC test
 
-on: workflow_dispatch
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   id-token: write
@@ -18,7 +21,7 @@ jobs:
         run: echo "run ${{ github.run_id }}, commit ${{ github.sha }}" > report.txt
       
       - name: Upload to s3
-        run: aws s3 cp report.txt s3://suraj-devops-learning-bucket-7/report.txt
+        run: aws s3 cp report.txt s3://suraj-devops-learning-bucket-7/reports/report-${{ github.run_id }}.tx
       
       - name: Show who I am
         run: aws sts get-caller-identity
