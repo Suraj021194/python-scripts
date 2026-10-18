@@ -1,0 +1,30 @@
+name: Publish to ECR
+
+on:
+  Push:
+    branches: [main]
+  workflow_dispatch:
+
+permission:
+  id-token: write
+  contents: read
+
+env: 
+  IMAGE_TAG: 206677902523.dkr.ecr.ap-south-1.amazonaws.com/log-analyser:${{ github.sha }}
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assume the AWS role
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: arn:aws:iam::206677902523:role/github-actions-role
+          aws-region: ap-south-1
+      - name: Log in to ECR
+        uses: aws-actions/amazon-ecr-login@v2
+      - name: Build image
+        run: docker build -t $IMAGE_TAG .
+      - name: Push image
+        run: docker push $IMAGE_TAG
