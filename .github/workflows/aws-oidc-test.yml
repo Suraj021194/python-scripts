@@ -14,6 +14,11 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::206677902523:role/github-actions-role
           aws-region: ap-south-1
+      - name: Create a small report
+        run: echo "run ${{ github.run_id }}, commit ${{ github.sha }}" > report.txt
+      
+      - name: Upload to s3
+        run: aws s3 cp report.txt s3://suraj-devops-learning-bucket-7/reports/report-${{ github.run_id }}.txt
       
       - name: Show who I am
         run: aws sts get-caller-identity
